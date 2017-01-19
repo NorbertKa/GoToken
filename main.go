@@ -22,6 +22,7 @@ func main() {
 	app.Version = version
 
 	app.Action = func(c *cli.Context) error {
+		fmt.Println("#==> Validating Database")
 		err := conf.ValidateDbTimeout()
 		if err != nil {
 			panic(err)
@@ -34,7 +35,8 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-
+		fmt.Println("#==> DONE")
+		fmt.Println("#==> Running DB Migrations")
 		check, errors := MigrateUp(conf)
 		if !check {
 			for _, error := range errors {
@@ -42,7 +44,7 @@ func main() {
 			}
 			panic("DB Migration Error")
 		}
-
+		fmt.Println("#==> DONE")
 		return nil
 	}
 
