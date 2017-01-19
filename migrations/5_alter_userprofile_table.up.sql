@@ -1,0 +1,1 @@
+ALTER TABLE gotoken.userprofile ADD COLUMN shouldRelog boolean;

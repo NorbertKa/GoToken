@@ -10,8 +10,7 @@ import (
 
 type TokenInfo struct {
 	jwt.StandardClaims
-	UserId     int    `json:"userId"`
-	Identifier string `json:"identifier"`
+	UserId int `json:"userId"`
 }
 
 func DecodeToken(token string, conf *config.Config) (*TokenInfo, error) {
@@ -28,12 +27,12 @@ func DecodeToken(token string, conf *config.Config) (*TokenInfo, error) {
 	return &claims, nil
 }
 
-func EncodeToken(userProfile *db.Userprofile, conf *config.Config) (string, error) {
+func EncodeToken(userProfile *models.Userprofile, conf *config.Config) (string, error) {
 	tok := jwt.NewWithClaims(jwt.SigningMethodHS512, jwt.MapClaims{
 		"userId":     userProfile.Id,
 		"identifier": userProfile.Identifier,
 		"nbf":        time.Now().UnixNano(),
-		"exp":        time.Hour.Nanoseconds(),
+		"exp":        time.Minute.Nanoseconds() * 15,
 	})
 	tokenString, err := tok.SignedString(conf.Secret)
 	if err != nil {

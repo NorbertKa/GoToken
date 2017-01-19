@@ -10,6 +10,30 @@ func NewGoToken() (*cli.App, *config.Config) {
 	app := cli.NewApp()
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
+			Name:        "rHost",
+			Value:       "localhost",
+			EnvVar:      "GOTOKEN_RHOST",
+			Destination: &conf.Redis.Host,
+		},
+		cli.IntFlag{
+			Name:        "rPort",
+			Value:       6379,
+			EnvVar:      "GOTOKEN_RPORT",
+			Destination: &conf.Redis.Port,
+		},
+		cli.StringFlag{
+			Name:        "rPassword",
+			Value:       "",
+			EnvVar:      "GOTOKEN_RPASSWORD",
+			Destination: &conf.Redis.Password,
+		},
+		cli.IntFlag{
+			Name:        "rDb",
+			Value:       0,
+			EnvVar:      "GOTOKEN_RDB",
+			Destination: &conf.Redis.DB,
+		},
+		cli.StringFlag{
 			Name:        "pHost",
 			Value:       "localhost",
 			Usage:       "Host for PostgreSQL database",

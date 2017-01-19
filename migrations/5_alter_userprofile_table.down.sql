@@ -1,0 +1,1 @@
+ALTER TABLE gotoken.userprofile DROP COLUMN shouldRelog;

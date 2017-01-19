@@ -31,7 +31,7 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		err = conf.Validate()
+		err = conf.ValidatePostgreConnection()
 		if err != nil {
 			panic(err)
 		}
