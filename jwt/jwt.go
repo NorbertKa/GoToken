@@ -11,6 +11,8 @@ import (
 type TokenInfo struct {
 	jwt.StandardClaims
 	UserId int `json:"userId"`
+	Nbf    int `json:"nbf"`
+	Exp    int `json:"exp"`
 }
 
 func DecodeToken(token string, conf *config.Config) (*TokenInfo, error) {
