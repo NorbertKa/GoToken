@@ -22,10 +22,17 @@ const (
 )
 
 type Config struct {
+	Issuer        string `json:"issuer"`
 	Port          int    `json:"port"`
 	HashCost      int    `json:"hashCost"`
 	MigrationPath string `json:"migrationPath"`
-	Secret        string `json:"secret"`
+
+	Secret             string `json:"secret"`
+	PublicKey          string `json:"publicKey"`
+	publicKeyLocation  string `json:"-"`
+	PrivateKey         string `json:"secretKey"`
+	privateKeyLocation string `json:"-"`
+	Algorithm          string `json:"algorithm"`
 
 	TokenDuration        int `json:"tokenDuration"`
 	RefreshTokenDuration int `json:"refreshTokenDuration"`

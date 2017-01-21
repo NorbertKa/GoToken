@@ -131,6 +131,41 @@ func NewGoToken() (*cli.App, *config.Config) {
 			EnvVar:      "GOTOKEN_SECRET",
 			Destination: &conf.Secret,
 		},
+		cli.IntFlag{
+			Name: "tokenDuration",
+			Value: 15,
+			Usage: "Regular token duration in minutes",
+			EnvVar: "GOTOKEN_TOKENDURATION",
+			Destination: &conf.TokenDuration,
+		},
+		cli.IntFlag{
+			Name: "rTokenDuration",
+			Value: 1440,
+			Usage: "Refresh token duration in minutes",
+			EnvVar: "GOTOKEN_RTOKENDURATION",
+			Destination: &conf.RefreshTokenDuration,
+		},
+		cli.IntFlag{
+			Name: "maxLogins",
+			Value: 0,
+			Usage: "Max logins from one user, 0 = Inf",
+			EnvVar: "GOTOKEN_MAXLOGINS",
+			Destination: &conf.MaxLogins,
+		},
+		cli.StringFlag{
+			Name: "publicKey",
+			Value: "",
+			Usage: "Public Key",
+			EnvVar: "GOTOKEN_PUBLICKEY",
+			Destination: &conf.PublicKey,
+		},
+		cli.StringFlag{
+			Name: "privateKey",
+			Value: "",
+			Usage: "Private Key",
+			EnvVar: "GOTOKEN_PRIVATEKEY",
+			Destination: &conf.PrivateKey,
+		},
 	}
 
 	app.Name = "GoToken"
