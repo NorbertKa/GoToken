@@ -22,12 +22,17 @@ const (
 )
 
 type Config struct {
-	Port          int           `json:"port"`
-	HashCost      int           `json:"hashCost"`
-	MigrationPath string        `json:"migrationPath"`
-	Secret        string        `json:"secret"`
-	Postgre       PostgreConfig `json:"postgre"`
-	Redis         RedisConfig   `json:"redis"`
+	Port          int    `json:"port"`
+	HashCost      int    `json:"hashCost"`
+	MigrationPath string `json:"migrationPath"`
+	Secret        string `json:"secret"`
+
+	TokenDuration        int `json:"tokenDuration"`
+	RefreshTokenDuration int `json:"refreshTokenDuration"`
+	MaxLogins            int `json:"maxLogins"`
+
+	Postgre PostgreConfig `json:"postgre"`
+	Redis   RedisConfig   `json:"redis"`
 }
 
 type PostgreConfig struct {
@@ -59,7 +64,7 @@ func (c Config) ValidateSslMode() error {
 		}
 	}
 	if !check {
-		return errors.New("ErrInvalidSslMode")
+		return errors.New(ErrInvalidSslMode)
 	}
 	return nil
 }

@@ -8,24 +8,24 @@ import (
 )
 
 func BanToken(db *database.Redis, conf *config.Config, token string) error {
-	token, err := jwt.DecodeToken(token, conf)
+	t, err := jwt.DecodeToken(token, conf)
 	if err != nil {
 		return err
 	}
 
-	isExpired, err := token.CheckIfExpired()
+	isExpired, err := t.CheckIfExpired()
 	if isExpired {
 		return err
 	}
 
 	z := redis.Z{
-		Score:  float64(token.Nbf),
+		Score:  float64(t.Nbf),
 		Member: token,
 	}
 
 	err = db.ZAdd("bannedTokens", z).Err()
 	if err != nil {
-		err
+		return err
 	}
 	return nil
 }
